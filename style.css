@@ -1,0 +1,401 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&display=swap');
+
+:root {
+  --bg-main:       #2D143C;
+  --bg-bar:        rgba(25, 140, 195, 0.10);
+  --accent-purple: #A07EC8;
+  --accent-btn:    #6B4FA0;
+  --text-header:   #C7E1EE;
+  --text-body:     #E4E4E4;
+  --text-pib:      #C4A9D5;
+  --text-nav-off:  #A99FAF;
+  --text-footer:   #C7E1EE;
+  --border-btn:    #E2D6DE;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-body);
+  font-family: 'Roboto Slab', serif;
+  margin: 0;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+.site-header {
+  background-color: var(--bg-bar);
+  border-bottom: 1px solid rgba(199, 225, 238, 0.2);
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  position: relative;
+}
+
+.header-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+  border-radius: 0 50px 50px 0;
+  flex-shrink: 0;
+}
+
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--text-header);
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+/* =========================================
+   НАВІГАЦІЯ
+   ========================================= */
+.site-nav {
+  background-color: var(--bg-bar);
+  border-bottom: 1px solid rgba(199,225,238,0.15);
+  padding: 0;
+}
+
+.site-nav .nav-link {
+  color: var(--text-nav-off);
+  font-family: 'Roboto Slab', serif;
+  font-size: 2rem;
+  padding: 0.55rem 1rem 0.45rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  display: block;
+}
+
+.site-nav .nav-link.active {
+  color: #ffffff;
+  border-bottom: 3px solid var(--accent-purple);
+}
+
+.site-nav .nav-link:not(.active):not(.disabled-link):hover {
+  color: #ffffff;
+  border-bottom: 3px solid rgba(255,255,255,0.3);
+}
+
+.site-nav .nav-link.disabled-link {
+  color: #6c6c7a !important;
+  pointer-events: none;
+  cursor: default;
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+.hero-section {
+  position: relative;
+  background-color: var(--bg-main);
+}
+
+.hero-inner {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-main);
+}
+
+/* Фонове фото — обрізаємо через overflow на .hero-bg, нижні кути 400px */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 0 0 400px 400px;
+  overflow: hidden;
+  border: 3px solid white;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  display: block;
+}
+
+/* Більший квадрат — білий 70% */
+.hero-photo-wrap {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background-color: rgba(255, 255, 255, 0.70);
+  border: 3px solid rgba(255, 255, 255, 1);
+}
+
+/* Фото профілю */
+.hero-photo {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+  outline: 3px solid rgba(255,255,255,0.70);
+  outline-offset: -3px;
+}
+
+/* Сітка по кутах hero - 4 кутових блоки */
+
+.hero-grid-bl,
+.hero-grid-br {
+  position: absolute;
+  width: 380px;
+  height: 450px;
+  z-index: 4;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255,255,255,0.5) 0px,
+      rgba(255,255,255,0.5) 3px,
+      transparent 3px,
+      transparent 30px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255,255,255,0.5) 0px,
+      rgba(255,255,255,0.5) 3px,
+      transparent 3px,
+      transparent 30px
+    );
+}
+
+.hero-grid-bl {
+  bottom: -150px;
+  left: 300px;
+  transform: rotate(-68deg);
+  transform-origin: bottom left;
+}
+
+.hero-grid-br {
+  bottom: -150px;
+  right: 300px;
+  transform: rotate(68deg);
+  transform-origin: bottom right;
+}
+
+.hero-grid-bl,
+.hero-grid-br {
+  z-index: 1;  /* під .hero-bg (z-index auto) і під .hero-photo-wrap (z-index 2) */
+}
+
+.hero-bg {
+  z-index: 2;  /* поверх сіток */
+}
+
+.hero-photo-wrap {
+  z-index: 3;  /* поверх усього */
+}
+
+/* =========================================
+   ТЕКСТ ПІД HERO
+   ========================================= */
+.hero-text {
+  background-color: var(--bg-main);
+  padding: 1.3rem 1rem 1.8rem;
+}
+
+.hero-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #E4E4E4;
+  -webkit-text-stroke: 1px #C4A9D5;
+  margin-bottom: 0.5rem;
+}
+
+.hero-position {
+  font-size: 2rem;
+  color: var(--text-body);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.site-footer {
+  background-color: var(--bg-bar);
+  border-top: 1px solid rgba(199,225,238,0.2);
+  color: var(--text-footer);
+}
+
+.footer-copy {
+  font-size: 1rem;
+  color: var(--text-footer);
+}
+
+.footer-form-label {
+  font-size: 1rem;
+  color: var(--text-footer);
+  white-space: nowrap;
+}
+
+.footer-input {
+  background-color: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 0.3rem 0.7rem;
+  font-size: 1.25rem;
+  font-family: 'Roboto Slab', serif;
+  width: 180px;
+}
+
+.footer-input:focus {
+  outline: none;
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 2px rgba(160,126,200,0.3);
+}
+
+
+.btn-callback {
+  background-color: var(--accent-btn);
+  color: #ffffff;
+  border: 1px solid var(--border-btn);
+  border-radius: 14px;
+  width: 276px;
+  height: 40px;
+  font-size: 1rem;
+  font-family: 'Roboto Slab', serif;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn-callback:hover {
+  background-color: #7c5fb0;
+  color: #fff;
+}
+
+/* =========================================
+   NAVBAR TOGGLER
+   ========================================= */
+.navbar-toggler { border-color: rgba(255,255,255,0.4); }
+.navbar-toggler-icon { filter: invert(1); }
+/* =============================================
+   RESPONSIVE — DESKTOP MEDIUM (≥992px)
+   ============================================= */
+@media (min-width: 992px) {
+  .site-header {
+    padding: 0.6rem 2rem;
+  }
+
+  .header-title {
+    font-size: 2.8rem;
+  }
+
+  .site-nav .nav-link {
+    font-size: 1.6rem;
+    padding: 0.6rem 1.4rem 0.5rem;
+  }
+
+  .hero-inner {
+    height: 440px;
+  }
+
+  .hero-photo {
+    width: 360px;
+    height: 360px;
+  }
+
+  .hero-name {
+    font-size: 2.8rem;
+  }
+
+  .hero-position {
+    font-size: 1.8rem;
+  }
+
+  .hero-text {
+    padding: 1.5rem 2rem 2rem;
+  }
+
+  .footer-input {
+    width: 220px;
+  }
+
+  .btn-callback {
+    width: 300px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — DESKTOP LARGE (≥1200px)
+   ============================================= */
+@media (min-width: 1200px) {
+  .site-header {
+    padding: 0.8rem 3rem;
+  }
+
+  .header-title {
+    font-size: 3.2rem;
+  }
+
+  .site-nav .nav-link {
+    font-size: 2rem;
+    padding: 0.7rem 1.8rem 0.6rem;
+  }
+
+  .hero-inner {
+    height: 500px;
+  }
+
+  .hero-photo {
+    width: 420px;
+    height: 420px;
+  }
+
+  .hero-photo-wrap {
+    padding: 18px;
+  }
+
+  .hero-name {
+    font-size: 3rem;
+  }
+
+  .hero-position {
+    font-size: 2rem;
+  }
+
+  .hero-text {
+    padding: 1.8rem 3rem 2.5rem;
+  }
+
+  .footer-input {
+    width: 260px;
+    font-size: 1.3rem;
+  }
+
+  .btn-callback {
+    width: 320px;
+    height: 48px;
+    font-size: 1.15rem;
+  }
+}

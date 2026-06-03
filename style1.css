@@ -1,0 +1,633 @@
+/* ===================================================
+   style1.css — Михайло Зубенко Portfolio
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap');
+
+/* ─── CSS Variables ─────────────────────────────── */
+:root {
+  --color-nav-bg:        #8A859C;
+  --color-main-bg:       #DDDAD5;
+  --color-header-text:   #D2CEE0;
+  --color-footer-text:   #D2CEE0;
+  --color-btn-text:      #FFFFFF;
+  --color-active:        #FFFFFF;
+  --color-inactive:      #A99FAF;
+  --color-accent:        #AEAB82;
+  --color-anchor-active: #AEA9BF;
+
+  --font-base: 'Roboto Slab', serif;
+
+  --radius-card:   14px;
+  --radius-btn:    14px;
+  --radius-anchor: 14px;
+
+  --btn-w: 276px;
+  --btn-h: 44px;
+
+  --shadow-btn: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  --col-left: minmax(280px, 30%);
+  --gap: 40px;
+}
+
+/* ─── Reset / Base ──────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
+
+body {
+  font-family: var(--font-base);
+  background: linear-gradient(to top left, #909996, #AC7674);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--color-header-text);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Header ────────────────────────────────────── */
+header {
+  position: relative;
+  background-color: #8A859C;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  width: 100%;
+}
+header .container { padding-left: 16px; }
+header p {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--color-header-text);
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+header img.header-icon {
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%; width: auto;
+  object-fit: cover;
+  border-radius: 0 50px 50px 0;
+  flex-shrink: 0;
+}
+
+/* ─── Navbar ────────────────────────────────────── */
+nav.navbar {
+  background-color: #8A859C;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  width: 100%;
+}
+.navbar-nav .nav-link {
+  font-family: var(--font-base);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-inactive);
+  position: relative;
+  padding: 10px 16px;
+  transition: color 0.2s;
+}
+.navbar-nav .nav-link:hover  { color: var(--color-active); }
+.navbar-nav .nav-link.active { color: var(--color-active); }
+.navbar-nav .nav-link.active::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 4px; left: 50%;
+  transform: translateX(-50%);
+  width: 80%; height: 4px;
+  background-color: var(--color-accent);
+  border-radius: 14px;
+}
+
+/* ─── Main ──────────────────────────────────────── */
+main { flex: 1; background: transparent; }
+
+/* ══════════════════════════════════════════════════
+   LAYOUT: CSS Grid 2 колонки × 2 рядки
+   Кожен рядок = [ліво] [право]
+   Grid автоматично вирівнює висоту — JS не потрібен
+   ══════════════════════════════════════════════════ */
+.exp-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 30%) 1fr;
+  grid-template-rows: auto auto;
+  column-gap: var(--gap);
+  row-gap: 56px;
+  padding: 40px 32px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* ─── Ліва клітинка (якір + картка) ─────────────── */
+.exp-left-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* ─── Якірний блок ───────────────────────────────── */
+.exp-anchor-box {
+  background-color: #8A859C;
+  border-radius: var(--radius-anchor);
+  padding: 20px 16px;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+}
+.exp-anchor-box nav {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* anchor-link: активний — білий + підкреслення, неактивний (disabled) — сірий, без hover */
+.anchor-link {
+  font-family: var(--font-base);
+  font-size: 22px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: var(--radius-anchor);
+  position: relative;
+  display: block;
+  transition: color 0.2s;
+  cursor: pointer;
+  pointer-events: auto;
+  color: var(--color-inactive);
+}
+.anchor-link:hover {
+  color: var(--color-active);
+}
+.anchor-link.active {
+  color: var(--color-active);
+  cursor: pointer;
+}
+.anchor-link.active::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 90%; height: 8px;
+  background-color: var(--color-anchor-active);
+  border-radius: 14px;
+}
+/* inactive — повністю сірий, без ефектів */
+.anchor-link.inactive {
+  color: var(--color-inactive);
+  opacity: 0.6;
+}
+
+/* ─── Базова клітинка ────────────────────────────── */
+.exp-cell {
+  background-color: transparent;
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: none;
+}
+
+/* ─── Аватар ─────────────────────────────────────── */
+.exp-cell--avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+  padding: 16px;
+}
+.exp-avatar-wrap {
+  position: relative;
+  /* коло завжди займає всю ширину картки мінус відступи */
+  width: calc(100% - 8px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* біле коло — завжди повністю видиме */
+.exp-avatar-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+.exp-avatar-wrap img {
+  position: relative;
+  width: 88%;
+  height: 88%;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0.80;
+  z-index: 1;
+}
+.exp-nickname {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-main-bg);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ─── TechWave лого ──────────────────────────────── */
+.exp-cell--logo-techwave {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0;
+  flex: 1;
+  padding: 0;
+  overflow: hidden;
+}
+.exp-logo-techwave-wrap {
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.exp-logo-techwave-wrap img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0;    /* без заглажених кутів */
+  opacity: 0.8;        /* видимість 80% */
+  display: block;
+}
+.exp-techwave-meta,
+.exp-techwave-role,
+.exp-techwave-period {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--color-main-bg);
+  text-align: center;
+  padding: 0 12px;
+  line-height: 1.15;
+  margin-bottom: 1px;
+}
+.exp-techwave-meta {
+  margin-top: 8px;
+}
+.exp-techwave-period {
+  padding-bottom: 12px;
+  margin-bottom: 0;
+}
+
+/* ─── Upwork: єдиний блок, дві колонки ──────────── */
+.upwork-inner {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  height: 100%;
+}
+.upwork-logo-col {
+  flex-shrink: 0;
+  width: 55%;
+  background: #fff;
+  border-radius: var(--radius-card) 0 0 var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  margin: -24px 0 -24px -24px;
+}
+.upwork-logo-col img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
+}
+.upwork-content-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  text-align: center;
+  padding: 12px 8px 8px;
+}
+.upwork-content-col .upwork-spacer-top  { flex: 1; }
+.upwork-content-col .upwork-spacer-bottom { flex: 0.5; min-height: 16px; }
+
+/* ─── Права секція (інфо-блок) ───────────────────── */
+.exp-cell--info {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.exp-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.exp-logo-box {
+  flex-shrink: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: rgba(255,255,255,0.08);
+}
+.exp-logo-box img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-card);
+  opacity: 0.9;
+}
+.exp-card-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--color-main-bg);
+  margin-bottom: 0;
+  text-align: center;
+}
+.exp-card-period {
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--color-main-bg);
+  text-align: center;
+}
+
+.exp-office-img {
+  width: 100%;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.exp-office-img img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  opacity: 0.85;
+  display: block;
+}
+
+.exp-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+.exp-list li {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--color-main-bg);
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.4;
+}
+.exp-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+/* ─── TechWave секція: зображення 70%, опис + кнопка по центру ── */
+.exp-cell--techwave {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+.tw-office-img {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+}
+.tw-office-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+.tw-bottom {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 24px;
+  text-align: center;
+}
+.tw-bottom .exp-list {
+  text-align: left;
+  width: 100%;
+}
+.tw-actions {
+  justify-content: center;
+}
+
+/* ─── Кнопки ─────────────────────────────────────── */
+.exp-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.exp-actions .btn,
+.btn.btn-sm.btn-secondary {
+  font-family: var(--font-base);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-btn-text) !important;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-btn);
+  width: var(--btn-w);
+  height: var(--btn-h);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-btn);
+  text-decoration: none;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+.exp-actions .btn:hover,
+.btn.btn-sm.btn-secondary:hover {
+  background-color: #c4c09a;
+  color: var(--color-btn-text) !important;
+  opacity: 0.95;
+}
+
+/* ─── Footer ─────────────────────────────────────── */
+footer {
+  background-color: #8A859C;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  width: 100%;
+}
+footer small, footer span, footer a, footer .small {
+  font-family: var(--font-base);
+  font-size: 20px;
+  color: var(--color-footer-text);
+}
+footer .btn {
+  font-family: var(--font-base);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-btn-text) !important;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-btn);
+  width: var(--btn-w);
+  height: var(--btn-h);
+  box-shadow: var(--shadow-btn);
+  transition: background-color 0.2s;
+}
+footer .btn:hover { background-color: #c4c09a; }
+
+/* ─── Navbar toggler ─────────────────────────────── */
+.navbar-toggler { border-color: var(--color-inactive); }
+.navbar-toggler-icon { filter: invert(0.7); }
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .exp-layout {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+    row-gap: 32px;
+  }
+  /* На планшеті ліва клітинка горизонтально */
+  .exp-left-cell {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  #anchor-techwave { display: none; } /* другий якір не потрібен */
+}
+@media (max-width: 700px) {
+  header p { font-size: 26px; }
+  .exp-left-cell { flex-direction: column; }
+}
+/* =============================================
+   RESPONSIVE — DESKTOP MEDIUM (≥992px)
+   ============================================= */
+@media (min-width: 992px) {
+  header p {
+    font-size: 36px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 22px;
+    padding: 10px 20px;
+  }
+
+  .exp-layout {
+    grid-template-columns: minmax(260px, 28%) 1fr;
+    column-gap: 36px;
+    padding: 36px 28px;
+    row-gap: 48px;
+  }
+
+  .exp-anchor-box {
+    padding: 18px 14px;
+  }
+
+  .anchor-link {
+    font-size: 20px;
+  }
+
+  .exp-card-title {
+    font-size: 26px;
+  }
+
+  .exp-card-period {
+    font-size: 24px;
+  }
+
+  .exp-list li {
+    font-size: 20px;
+  }
+
+  .exp-nickname {
+    font-size: 18px;
+  }
+
+  .exp-actions .btn,
+  .btn.btn-sm.btn-secondary {
+    font-size: 18px;
+    width: 240px;
+    height: 40px;
+  }
+
+  footer small, footer span, footer a, footer .small {
+    font-size: 18px;
+  }
+
+  footer .btn {
+    font-size: 18px;
+    width: 240px;
+    height: 40px;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — DESKTOP LARGE (≥1200px)
+   ============================================= */
+@media (min-width: 1200px) {
+  header p {
+    font-size: 40px;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 24px;
+    padding: 10px 24px;
+  }
+
+  :root {
+    --col-left: minmax(280px, 30%);
+    --gap: 40px;
+    --btn-w: 276px;
+    --btn-h: 44px;
+  }
+
+  .exp-layout {
+    grid-template-columns: minmax(280px, 30%) 1fr;
+    column-gap: 40px;
+    padding: 40px 32px;
+    row-gap: 56px;
+  }
+
+  .exp-anchor-box {
+    padding: 20px 16px;
+  }
+
+  .anchor-link {
+    font-size: 22px;
+  }
+
+  .exp-card-title {
+    font-size: 28px;
+  }
+
+  .exp-card-period {
+    font-size: 26px;
+  }
+
+  .exp-list li {
+    font-size: 22px;
+  }
+
+  .exp-nickname {
+    font-size: 20px;
+  }
+
+  .exp-actions .btn,
+  .btn.btn-sm.btn-secondary {
+    font-size: 20px;
+    width: 276px;
+    height: 44px;
+  }
+
+  footer small, footer span, footer a, footer .small {
+    font-size: 20px;
+  }
+
+  footer .btn {
+    font-size: 20px;
+    width: 276px;
+    height: 44px;
+  }
+}
